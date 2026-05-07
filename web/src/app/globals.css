@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------------------------------------
+   Design tokens — Clinical Lab DA.
+   Mirrors tailwind.config.ts so SVG attributes / inline styles align.
+   ---------------------------------------------------------------------- */
+:root {
+  --bg-base: #fafaf7;
+  --bg-surface: #f0f0eb;
+  --bg-elevated: #ffffff;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b66;
+  --text-tertiary: #a3a399;
+
+  --border-subtle: #d4d4d0;
+  --border-default: #b8b8b0;
+
+  --accent-warning: #facc15;
+  --accent-warning-deep: #ca8a04;
+  --accent-critical: #dc2626;
+  --accent-data: #1e40af;
+  --accent-active: #16a34a;
+
+  /* Tabular numerals everywhere — column-aligned data */
+  font-feature-settings: 'tnum';
+}
+
+html {
+  background-color: var(--bg-base);
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Söhne', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--accent-warning);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-warning-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-warning-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Subtle grid texture on the body — clinical paper feel */
+body {
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(250, 250, 247, 0.96) 0%,
+    rgba(250, 250, 247, 0.98) 60%,
+    var(--bg-base) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+body > * {
+  position: relative;
+  z-index: 1;
+}
