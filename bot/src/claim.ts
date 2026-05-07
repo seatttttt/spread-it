@@ -16,7 +16,13 @@
 
 import { Transaction, ComputeBudgetProgram } from '@solana/web3.js';
 import { createRequire } from 'node:module';
-import { connection, distributionWallet, lamportsToSol } from './solana.js';
+import {
+  connection,
+  distributionWallet,
+  isWalletConfigured,
+  lamportsToSol,
+  requireWallet,
+} from './solana.js';
 import { logger } from './logger.js';
 
 // The @nirholas/pump-sdk package has a broken ESM exports config in v1.30
@@ -59,8 +65,16 @@ export interface ClaimResult {
  *   4. Send tx, await confirmation
  */
 export async function attemptClaim(): Promise<ClaimResult> {
+  if (!isWalletConfigured) {
+    return {
+      attempted: false,
+      claimed: false,
+      pendingLamports: 0,
+      error: 'standby: dev wallet not configured',
+    };
+  }
   const sdk = getSdk();
-  const creator = distributionWallet.publicKey;
+  const creator = requireWallet().publicKey;
 
   let pendingLamports = 0;
   try {
@@ -91,7 +105,7 @@ export async function attemptClaim(): Promise<ClaimResult> {
       tx.add(ix);
     }
 
-    const sig = await connection.sendTransaction(tx, [distributionWallet], {
+    const sig = await connection.sendTransaction(tx, [requireWallet()], {
       skipPreflight: false,
       maxRetries: 2,
     });

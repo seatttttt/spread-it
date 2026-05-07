@@ -16,7 +16,7 @@ import {
   Transaction,
   ComputeBudgetProgram,
 } from '@solana/web3.js';
-import { connection, distributionWallet, solToLamports } from './solana.js';
+import { connection, requireWallet, solToLamports } from './solana.js';
 import { logger } from './logger.js';
 import { db } from './db.js';
 import type { ParsedSwap } from './pump.js';
@@ -163,18 +163,19 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
 }
 
 async function sendChunk(chunk: Transfer[]): Promise<string> {
+  const wallet = requireWallet();
   const tx = new Transaction();
   tx.add(ComputeBudgetProgram.setComputeUnitLimit({ units: 200_000 }));
   for (const t of chunk) {
     tx.add(
       SystemProgram.transfer({
-        fromPubkey: distributionWallet.publicKey,
+        fromPubkey: wallet.publicKey,
         toPubkey: new PublicKey(t.recipient),
         lamports: t.lamports,
       }),
     );
   }
-  const sig = await connection.sendTransaction(tx, [distributionWallet], {
+  const sig = await connection.sendTransaction(tx, [wallet], {
     skipPreflight: false,
     maxRetries: 2,
   });

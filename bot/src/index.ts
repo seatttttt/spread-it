@@ -12,7 +12,7 @@
 import express, { type Request, type Response } from 'express';
 import { config } from './config.js';
 import { logger } from './logger.js';
-import { distributionWallet } from './solana.js';
+import { distributionWallet, isWalletConfigured } from './solana.js';
 import { handleHeliusWebhook } from './webhook.js';
 import { processEvent } from './event-processor.js';
 import { buildMockSwap, buildMockSpread } from './pump.js';
@@ -29,12 +29,13 @@ app.use(express.json({ limit: '5mb' }));
 // ---------------------------------------------------------------------------
 app.get('/health', (_req: Request, res: Response) => {
   res.json({
-    status: 'ok',
+    status: isWalletConfigured && config.TOKEN_MINT ? 'ok' : 'standby',
     timestamp: new Date().toISOString(),
     network: config.SOLANA_NETWORK,
-    distributionWallet: distributionWallet.publicKey.toBase58(),
+    distributionWallet: distributionWallet?.publicKey.toBase58() ?? null,
     nodeEnv: config.NODE_ENV,
     tokenMint: config.TOKEN_MINT ?? null,
+    walletConfigured: isWalletConfigured,
     mechanic: {
       carrierMinPct: config.CARRIER_MIN_PCT,
       spreadMinPct: config.SPREAD_MIN_PCT,
@@ -61,7 +62,9 @@ if (config.NODE_ENV === 'development') {
       const swap = buildMockSwap({
         direction: req.body.direction ?? 'buy',
         walletAddress:
-          req.body.walletAddress ?? distributionWallet.publicKey.toBase58(),
+          req.body.walletAddress ??
+          distributionWallet?.publicKey.toBase58() ??
+          'mock-wallet',
         solAmount: Number(req.body.solAmount ?? 0.5),
         tokenAmount: req.body.tokenAmount
           ? Number(req.body.tokenAmount)
@@ -102,6 +105,10 @@ if (config.NODE_ENV === 'development') {
 // Boot
 // ---------------------------------------------------------------------------
 async function boot(): Promise<void> {
+  if (!distributionWallet) {
+    logger.warn('STANDBY mode: DISTRIBUTION_WALLET_PRIVATE_KEY not set — bot will idle until configured');
+    return;
+  }
   // Bootstrap Patient Zero (the dev wallet) so it's visible in the tree
   // immediately and excluded from R-distribution.
   try {
@@ -129,7 +136,7 @@ const server = app.listen(config.PORT, () => {
       port: config.PORT,
       env: config.NODE_ENV,
       network: config.SOLANA_NETWORK,
-      wallet: distributionWallet.publicKey.toBase58(),
+      wallet: distributionWallet?.publicKey.toBase58() ?? '(standby)',
       tokenMint: config.TOKEN_MINT ?? '(not set)',
     },
     '$SPREAD bot online',

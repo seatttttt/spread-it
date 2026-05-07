@@ -10,11 +10,25 @@ export const connection = new Connection(config.SOLANA_RPC_URL, 'confirmed');
 
 /**
  * Distribution wallet keypair — holds creator fees temporarily before distribution.
- * Balance is flushed every 60s if it exceeds DISTRIBUTION_WALLET_FLUSH_THRESHOLD_SOL.
+ * Null if DISTRIBUTION_WALLET_PRIVATE_KEY env var is unset (standby mode).
  */
-export const distributionWallet = Keypair.fromSecretKey(
-  bs58.decode(config.DISTRIBUTION_WALLET_PRIVATE_KEY),
-);
+export const distributionWallet: Keypair | null =
+  config.DISTRIBUTION_WALLET_PRIVATE_KEY
+    ? Keypair.fromSecretKey(bs58.decode(config.DISTRIBUTION_WALLET_PRIVATE_KEY))
+    : null;
+
+/** True when the dev wallet is configured and the bot can act on-chain. */
+export const isWalletConfigured: boolean = distributionWallet !== null;
+
+/** Throws a clear message when dev-wallet operations are attempted in standby. */
+export function requireWallet(): Keypair {
+  if (!distributionWallet) {
+    throw new Error(
+      'distribution wallet not configured (set DISTRIBUTION_WALLET_PRIVATE_KEY)',
+    );
+  }
+  return distributionWallet;
+}
 
 /**
  * Pump.fun + PumpSwap program IDs.

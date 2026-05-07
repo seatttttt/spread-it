@@ -15,8 +15,9 @@ const ConfigSchema = z.object({
   TOKEN_DECIMALS: z.coerce.number().int().nonnegative().default(6),
 
   // Distribution wallet (Patient Zero)
-  DISTRIBUTION_WALLET_PRIVATE_KEY: z.string().min(1),
-  DISTRIBUTION_WALLET_PUBLIC_KEY: z.string().min(1),
+  // Optional pre-launch — bot runs in "standby" mode until both are set.
+  DISTRIBUTION_WALLET_PRIVATE_KEY: z.string().optional(),
+  DISTRIBUTION_WALLET_PUBLIC_KEY: z.string().optional(),
 
   // Supabase (service role for the bot — bypasses RLS)
   SUPABASE_URL: z.string().url(),
