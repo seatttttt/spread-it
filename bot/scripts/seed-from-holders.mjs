@@ -27,8 +27,9 @@ if (!TOKEN_MINT || !HELIUS_KEY || !DEV_WALLET || !SUPABASE_URL || !SUPABASE_SERV
 }
 
 const TOTAL_SUPPLY_ATOMIC = 10n ** 15n; // 1B tokens × 10^6 decimals
-// Skip "holders" that own > 50% of supply (these are system accounts)
-const SYSTEM_ACCOUNT_THRESHOLD = TOTAL_SUPPLY_ATOMIC / 2n;
+// Skip "holders" that own > 5% of supply (system accounts: bonding curve PDA,
+// PumpSwap LP, etc). 5% is well above any realistic single human holder.
+const SYSTEM_ACCOUNT_THRESHOLD = TOTAL_SUPPLY_ATOMIC / 20n;
 
 // 1. Fetch all token accounts via Helius.
 async function fetchHolders() {
