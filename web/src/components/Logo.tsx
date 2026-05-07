@@ -1,8 +1,8 @@
 /**
- * Logo — $SPREAD biohazard-inspired emblem.
+ * Logo: $SPREAD biohazard-inspired emblem.
  *
  * Pure SVG, transparent background, scalable.
- * Three rings around a central pulse — the trefoil silhouette
+ * Three rings around a central pulse: the trefoil silhouette
  * reads as "biohazard" without literally copying the WHO symbol.
  *
  * Color is `currentColor`-driven so it inherits from the Tailwind
@@ -34,7 +34,7 @@ export function Logo({ size = 48, className = '' }: LogoProps) {
         </radialGradient>
       </defs>
 
-      {/* Outer ring — chamber boundary */}
+      {/* Outer ring: chamber boundary */}
       <circle
         cx="100"
         cy="100"

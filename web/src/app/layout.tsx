@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Spread It · $SPREAD — strain tracker',
+  title: 'Spread It · $SPREAD, strain tracker',
   description:
     'Carriers spread the strain. Pool distributes live, weighted by R-share. Drain your bag and you are quarantined.',
   openGraph: {

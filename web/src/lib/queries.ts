@@ -1,5 +1,5 @@
 /**
- * queries.ts — Supabase query helpers + row-to-domain mappers.
+ * queries.ts: Supabase query helpers + row-to-domain mappers.
  *
  * Centralizes the shape of DB rows so component code stays clean.
  * If the schema changes, only this file needs updating.

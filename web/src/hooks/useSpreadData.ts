@@ -59,7 +59,7 @@ export function useSpreadData(): SpreadData {
 
   useEffect(() => {
     if (!isSupabaseConfigured || !supabase) {
-      // Mock mode — start the live mock stream
+      // Mock mode: start the live mock stream
       const unsub = subscribeMockEvents((event) => {
         setLastEvent(event);
         setFeed((prev) => [event, ...prev].slice(0, FEED_CAP));
@@ -195,7 +195,7 @@ export function useSpreadData(): SpreadData {
         (payload) => {
           const row = payload.new as Parameters<typeof rowToNode>[0] | undefined;
           if (!row?.wallet) return;
-          // Lightweight node update — patch in place
+          // Lightweight node update: patch in place
           setNodes((prev) => {
             const existing = prev.find((n) => n.wallet === row.wallet);
             if (existing) {
@@ -213,7 +213,7 @@ export function useSpreadData(): SpreadData {
                   : n,
               );
             }
-            // New holder — refresh full set lazily
+            // New holder: refresh full set lazily
             void loadNodes(client).then(setNodes).catch(() => {});
             return prev;
           });

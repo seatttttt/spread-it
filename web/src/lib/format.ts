@@ -1,10 +1,10 @@
 /**
- * Formatters — clinical lab presentation rules.
+ * Formatters: clinical lab presentation rules.
  * All number output uses tabular numerals (set globally in CSS).
  */
 
 export function truncateAddress(addr: string | null | undefined, chars = 4): string {
-  if (!addr) return '—';
+  if (!addr) return '-';
   if (addr.includes('.')) return addr;
   if (addr.length <= chars * 2 + 3) return addr;
   return `${addr.slice(0, chars)}…${addr.slice(-chars)}`;
@@ -58,7 +58,7 @@ export function formatTimeAgo(date: Date | string): string {
 }
 
 export function formatQuarantineRemaining(until: string | null): string {
-  if (!until) return '—';
+  if (!until) return '-';
   const ms = new Date(until).getTime() - Date.now();
   if (ms <= 0) return 'expired';
   const h = Math.floor(ms / (60 * 60 * 1000));

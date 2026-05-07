@@ -11,7 +11,7 @@ import { SelectedNodePanel } from './sidebar/SelectedNodePanel';
 import { WelcomeModal } from './WelcomeModal';
 
 /**
- * SpreadDashboard — top-level client component.
+ * SpreadDashboard: top-level client component.
  *
  * Pulls data from useSpreadData (Supabase realtime + mock fallback).
  * Renders the infection tree with a clinical sidebar (70/30 desktop,
@@ -30,7 +30,7 @@ export function SpreadDashboard() {
         </div>
       )}
 
-      {/* Desktop layout — 70/30 split, full viewport height */}
+      {/* Desktop layout: 70/30 split, full viewport height */}
       <div className="hidden lg:grid grid-cols-[1fr_360px] h-[calc(100vh-89px)] overflow-hidden">
         <section className="relative border-r border-border-subtle overflow-hidden">
           <InfectionTree
@@ -59,7 +59,7 @@ export function SpreadDashboard() {
         </aside>
       </div>
 
-      {/* Mobile layout — tree on top, sidebar stacked below */}
+      {/* Mobile layout: tree on top, sidebar stacked below */}
       <div className="lg:hidden flex flex-col">
         <section className="relative h-[60vh] border-b border-border-subtle overflow-hidden">
           <InfectionTree

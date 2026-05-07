@@ -1,12 +1,12 @@
 /**
- * Mock data generators — used when Supabase env vars are missing
+ * Mock data generators: used when Supabase env vars are missing
  * (preview mode for design iteration without standing up DB).
  *
  * IMPORTANT: All initial-state functions are PURE / DETERMINISTIC.
  * Each call returns the same data given the same seed. Required to avoid
  * Next.js hydration mismatches between SSR and CSR.
  *
- * Live functions (subscribeMockEvents) use Math.random — only called inside
+ * Live functions (subscribeMockEvents) use Math.random: only called inside
  * useEffect (client-only).
  */
 
@@ -47,7 +47,7 @@ function detWallet(key: number): string {
 const PATIENT_ZERO = 'PZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
 // ---------------------------------------------------------------------------
-// Initial state — fully deterministic
+// Initial state: fully deterministic
 // ---------------------------------------------------------------------------
 
 const TOTAL_NODES = 32;
@@ -251,7 +251,7 @@ export function mockFeed(n = 30): FeedEvent[] {
 }
 
 // ---------------------------------------------------------------------------
-// Live mock subscription — client-only, uses Math.random
+// Live mock subscription: client-only, uses Math.random
 // ---------------------------------------------------------------------------
 
 export function subscribeMockEvents(cb: (event: FeedEvent) => void): () => void {

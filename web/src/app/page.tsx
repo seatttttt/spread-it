@@ -33,7 +33,7 @@ export default function HomePage() {
               href="https://x.com/spreadit_fun"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Follow on X — @spreadit_fun"
+              aria-label="Follow on X, @spreadit_fun"
               className="flex items-center justify-center w-8 h-8 border border-border-default text-text-secondary transition-colors duration-200 hover:text-accent-warning-deep hover:border-accent-warning-deep focus-visible:text-accent-warning-deep focus-visible:border-accent-warning-deep"
             >
               <svg

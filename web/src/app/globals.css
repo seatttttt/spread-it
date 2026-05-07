@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ----------------------------------------------------------------------
-   Design tokens — Clinical Lab DA.
+   Design tokens, Clinical Lab DA.
    Mirrors tailwind.config.ts so SVG attributes / inline styles align.
    ---------------------------------------------------------------------- */
 :root {
@@ -24,7 +24,7 @@
   --accent-data: #1e40af;
   --accent-active: #16a34a;
 
-  /* Tabular numerals everywhere — column-aligned data */
+  /* Tabular numerals everywhere: column-aligned data */
   font-feature-settings: 'tnum';
 }
 
@@ -68,7 +68,7 @@ body {
   border-radius: 2px;
 }
 
-/* Subtle grid texture on the body — clinical paper feel */
+/* Subtle grid texture on the body: clinical paper feel */
 body {
   background-image:
     linear-gradient(var(--border-subtle) 1px, transparent 1px),

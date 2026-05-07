@@ -1,5 +1,5 @@
 /**
- * Shared types — kept in sync with Supabase schema (supabase/migrations/0001_init.sql).
+ * Shared types: kept in sync with Supabase schema (supabase/migrations/0001_init.sql).
  */
 
 export type WalletStatus = 'active' | 'quarantined' | 'patient_zero';

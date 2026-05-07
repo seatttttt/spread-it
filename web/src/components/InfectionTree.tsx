@@ -247,7 +247,7 @@ export function InfectionTree({
             ctx.fill();
           }
 
-          // Patient Zero — concentric pulse
+          // Patient Zero: concentric pulse
           if (n.isPatientZero) {
             const pulseR = r + 4 + Math.sin(Date.now() / 600) * 2;
             ctx.beginPath();

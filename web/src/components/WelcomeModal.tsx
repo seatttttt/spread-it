@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * WelcomeModal — first-visit clinical briefing.
+ * WelcomeModal: first-visit clinical briefing.
  *
  * Forces the user to read the protocol before interacting.
  * Dismissed via the "Acknowledge" button or Escape key.
@@ -108,20 +108,20 @@ export function WelcomeModal() {
               </p>
               <ul className="space-y-2 list-none pl-0 font-mono text-[12px] text-text-secondary">
                 <li>
-                  <span className="text-text-primary">▸ CARRIER</span> — hold ≥
-                  0.1% of supply.
+                  <span className="text-text-primary">▸ CARRIER</span> · hold
+                  ≥ 0.1% of supply.
                 </li>
                 <li>
-                  <span className="text-text-primary">▸ SPREAD</span> — transfer
+                  <span className="text-text-primary">▸ SPREAD</span> · transfer
                   ≥ 0.01% to a clean wallet → +1 R per pair, ever.
                 </li>
                 <li>
-                  <span className="text-text-primary">▸ HOST FILTER</span> —
+                  <span className="text-text-primary">▸ HOST FILTER</span> ·
                   recipient must hold ≥ 0.1 SOL · be ≥ 7 days old · have ≥ 3
                   outgoing tx.
                 </li>
                 <li>
-                  <span className="text-accent-critical">▸ QUARANTINE</span> —
+                  <span className="text-accent-critical">▸ QUARANTINE</span> ·
                   drain {'>'} 40% of peak holdings → R reset · 24h cooldown.
                 </li>
               </ul>

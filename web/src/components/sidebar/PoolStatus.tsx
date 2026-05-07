@@ -37,7 +37,7 @@ export function PoolStatus({ pool }: PoolStatusProps) {
         />
         <Stat
           label="Last trade"
-          value={pool.lastTradeAt ? formatTimeAgo(pool.lastTradeAt) : '—'}
+          value={pool.lastTradeAt ? formatTimeAgo(pool.lastTradeAt) : '-'}
         />
       </dl>
     </section>

@@ -4,7 +4,7 @@ import { Logo } from '../../components/Logo';
 export const metadata = {
   title: 'Protocol · Spread It',
   description:
-    'Mechanic specification — eligibility, spread cost, anti-sybil, R-score, drain forfeit, distribution.',
+    'Mechanic specification, eligibility, spread cost, anti-sybil, R-score, drain forfeit, distribution.',
 };
 
 export default function ProtocolPage() {
@@ -60,7 +60,7 @@ export default function ProtocolPage() {
             at least <Mono>0.1%</Mono> of total supply (1,000,000 tokens of a
             1B supply). The threshold is checked at the moment of every
             outbound transfer. Wallets below the threshold are tracked as{' '}
-            <strong>dormant holders</strong> — visible in the orbital but
+            <strong>dormant holders</strong>, visible in the orbital but
             unable to earn R.
           </p>
         </Section>
@@ -75,7 +75,7 @@ export default function ProtocolPage() {
           <p>
             The credit is granted exactly once per{' '}
             <Mono>(sender, recipient)</Mono> pair, ever. Re-spreading to the
-            same wallet does not earn additional R — those transfers count as{' '}
+            same wallet does not earn additional R, those transfers count as{' '}
             <em>drain</em> instead.
           </p>
         </Section>
@@ -99,7 +99,7 @@ export default function ProtocolPage() {
             </li>
           </ul>
           <p className="mt-3">
-            A failing recipient does not block the transfer on-chain — but the
+            A failing recipient does not block the transfer on-chain, but the
             sender forfeits R for that transfer, and the outflow counts as
             drain toward forfeit.
           </p>
@@ -114,7 +114,7 @@ export default function ProtocolPage() {
             <strong>Drain</strong> = all outflows that are not credited
             spreads. Sells on the bonding curve, sells on PumpSwap, transfers
             to wallets that fail the host filter, repeat transfers to
-            already-credited recipients — all count as drain. Spread-credited
+            already-credited recipients, all count as drain. Spread-credited
             outflows are excluded.
           </p>
           <p>
@@ -143,7 +143,7 @@ export default function ProtocolPage() {
           <p>
             On every trade, pump.fun mints a creator fee accruing to the dev
             wallet (Patient Zero). The bot collects vault balances every 10
-            seconds and distributes to carriers — pro-rata, weighted by
+            seconds and distributes to carriers, pro-rata, weighted by
             R-share.
           </p>
           <p>
@@ -163,12 +163,12 @@ export default function ProtocolPage() {
         <Section title="06 · Patient Zero">
           <p>
             The dev wallet is designated <strong>Patient Zero</strong>. It
-            holds an R-floor of 10 (ornamental — used for visualization only)
+            holds an R-floor of 10 (ornamental, used for visualization only)
             and is <strong>excluded from distribution</strong>.
           </p>
           <p>
             Patient Zero cannot earn R from its own spreads (no double-dip).
-            The dev's only economic exposure is the pre-launch token bag —
+            The dev's only economic exposure is the pre-launch token bag,
             same as any other holder.
           </p>
         </Section>
@@ -182,7 +182,7 @@ export default function ProtocolPage() {
           <p>
             The bot uses the Supabase service-role key to write state; the
             frontend uses the anon key with read-only RLS. No user input
-            mediates carrier eligibility — the bot reads on-chain truth.
+            mediates carrier eligibility, the bot reads on-chain truth.
           </p>
         </Section>
 
